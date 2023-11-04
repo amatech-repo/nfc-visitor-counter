@@ -11,15 +11,19 @@
       <div class="title">Welcome to あまてく</div>
       <div class="subtitle">来場者数</div>
       <div class="visitor">
-        <div id="visitorCount" class="counter">{data.count}</div>
+        <div id="visitorCount" class="counter">00</div>
         <div class="unit">人</div>
+      </div>
+      <!-- スタートと停止ボタンを追加 -->
+      <div class="controls">
+        <button onclick="startCount()">スタート</button>
+        <button onclick="stopCount()">停止</button>
       </div>
     </div>
 
     <script>
       // サーバーからカウンターの値を取得して表示を更新する関数
       function fetchVisitorCount() {
-        // サーバーからカウンターの値を取得するためのAPIエンドポイントにリクエストを送る
         fetch("/count")
           .then((response) => {
             if (!response.ok) {
@@ -28,7 +32,6 @@
             return response.json();
           })
           .then((data) => {
-            // サーバーから受け取った来場者数で表示を更新する
             updateDisplay(data.count);
           })
           .catch((error) => {
@@ -43,6 +46,48 @@
       function updateDisplay(count) {
         const visitorCountElement = document.getElementById("visitorCount");
         visitorCountElement.textContent = count.toString().padStart(2, "0");
+      }
+
+      // カウントを開始する
+      function startCount() {
+        fetch("/start-count")
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.text();
+          })
+          .then((message) => {
+            console.log(message);
+            // ここでカウンター表示をアクティブにするなどの処理が可能
+          })
+          .catch((error) => {
+            console.error(
+              "There has been a problem with your fetch operation:",
+              error
+            );
+          });
+      }
+
+      // カウントを停止する
+      function stopCount() {
+        fetch("/stop-count")
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.text();
+          })
+          .then((message) => {
+            console.log(message);
+            // ここでカウンター表示を非アクティブにするなどの処理が可能
+          })
+          .catch((error) => {
+            console.error(
+              "There has been a problem with your fetch operation:",
+              error
+            );
+          });
       }
 
       // ページが読み込まれた時にカウンターを取得する
