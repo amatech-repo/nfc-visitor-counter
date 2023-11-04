@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>来場者カウンター</title>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #f4f4f4;
+        text-align: center;
+        padding: 50px;
+      }
+      .counter {
+        font-size: 5em;
+        margin: 20px 0;
+      }
+      .title {
+        font-size: 2em;
+        margin-bottom: 10px;
+      }
+      .subtitle {
+        font-size: 1.5em;
+        color: #333;
+        margin-bottom: 30px;
+      }
+      @media (max-width: 600px) {
+        body {
+          padding: 20px;
+        }
+        .counter {
+          font-size: 3em;
+        }
+        .title {
+          font-size: 1.5em;
+        }
+        .subtitle {
+          font-size: 1em;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="title">Welcome to あまてく</div>
+      <div class="subtitle">来場者数</div>
+      <div id="visitorCount" class="counter">{data.count}</div>
+    </div>
+
+    <script>
+      // サーバーからカウンターの値を取得して表示を更新する関数
+      function fetchVisitorCount() {
+        // サーバーからカウンターの値を取得するためのAPIエンドポイントにリクエストを送る
+        fetch("/count")
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            // サーバーから受け取った来場者数で表示を更新する
+            updateDisplay(data.count);
+          })
+          .catch((error) => {
+            console.error(
+              "There has been a problem with your fetch operation:",
+              error
+            );
+          });
+      }
+
+      // 表示を更新する関数
+      function updateDisplay(count) {
+        const visitorCountElement = document.getElementById("visitorCount");
+        visitorCountElement.textContent = count.toString().padStart(2, "0");
+      }
+
+      // ページが読み込まれた時にカウンターを取得する
+      window.addEventListener("DOMContentLoaded", (event) => {
+        fetchVisitorCount();
+      });
+    </script>
+  </body>
+</html>
