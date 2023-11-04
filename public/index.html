@@ -67,6 +67,9 @@
               error
             );
           });
+
+        // 5秒ごとに来場者数を更新する
+        setInterval(fetchVisitorCount, 5000);
       }
 
       // カウントを停止する
