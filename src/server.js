@@ -49,13 +49,14 @@ app.get("/increment", (req, res) => {
     return res.status(403).send("現在カウントは有効ではありません。");
   }
 
-  // 今日の日付に対応するレコードを取得
-  const selectSql = `SELECT id, totalVisitors FROM visitor_counts WHERE day = DATE('now');`;
+  const selectSql = `SELECT id, totalVisitors FROM visitor_counts WHERE day = strftime('%Y-%m-%d', 'now', 'localtime');`;
 
   db.get(selectSql, (err, row) => {
     if (err) {
       return console.error(err.message);
     }
+
+    console.log(row);
 
     if (row) {
       // レコードが存在する場合、訪問者数を更新
@@ -68,7 +69,7 @@ app.get("/increment", (req, res) => {
       });
     } else {
       // レコードが存在しない場合、新しいレコードを作成
-      const insertSql = `INSERT INTO visitor_counts (day, totalVisitors) VALUES (DATE('now'), 1)`;
+      const insertSql = `INSERT INTO visitor_counts (day, totalVisitors) VALUES (strftime('%Y-%m-%d', 'now', 'localtime'), 0)`;
       db.run(insertSql, function (err) {
         if (err) {
           return console.error(err.message);
@@ -82,7 +83,7 @@ app.get("/increment", (req, res) => {
 // 来場者数を取得するためのエンドポイント
 app.get("/count", (req, res) => {
   // 今日の日付に対応するレコードを取得して来場者数を返す
-  const sql = `SELECT totalVisitors FROM visitor_counts WHERE day = DATE('now')`;
+  const sql = `SELECT totalVisitors FROM visitor_counts WHERE day = strftime('%Y-%m-%d', 'now', 'localtime')`;
 
   db.get(sql, (err, row) => {
     if (err) {
@@ -101,7 +102,8 @@ app.get("/admin", (req, res) => {
 app.get("/reset-count", (req, res) => {
   const apiKey = req.query.apiKey; // URLパラメータからAPIキーを取得
   const password = req.query.password; // URLパラメータからパスワードを取得
-  const resetDate = req.query.date || "DATE('now')"; // パラメータからリセットする日付を取得、なければ今日
+  const resetDate =
+    req.query.date || "strftime('%Y-%m-%d', 'now', 'localtime')"; // パラメータからリセットする日付を取得、なければ今日
 
   console.log(apiKey, password, resetDate);
   console.log(process.env.ADMIN_API_KEY, process.env.ADMIN_PASSWORD);
