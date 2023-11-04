@@ -3,10 +3,11 @@ const sqlite3 = require("sqlite3").verbose();
 
 const app = express();
 const port = 3000;
+const path = require("path");
 require("dotenv").config();
 
-// 静的ファイルを提供するディレクトリを設定
-app.use(express.static("public"));
+// `public` ディレクトリを静的ファイルとして設定する
+app.use(express.static(path.join(__dirname, "..", "public")));
 
 // カウントが有効かどうかを追跡するフラグ
 let isCountingEnabled = false;
@@ -28,7 +29,7 @@ db.run(`CREATE TABLE IF NOT EXISTS visitor_counts (
 
 // ルートエンドポイント
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/index.html");
+  res.sendFile(path.join(__dirname, "..", "public", "index.html"));
 });
 
 // カウントを開始するエンドポイント
@@ -95,7 +96,7 @@ app.get("/count", (req, res) => {
 
 // 管理者画面に直接アクセスするためのルートを追加
 app.get("/admin", (req, res) => {
-  res.sendFile("admin.html", { root: __dirname });
+  res.sendFile(path.join(__dirname, "..", "public", "admin.html"));
 });
 
 // 管理者用のエンドポイントを追加（セキュリティ対策として基本的なAPIキーとパスワードを使用）
