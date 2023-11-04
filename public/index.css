@@ -1,0 +1,48 @@
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #f4f4f4;
+  text-align: center;
+  padding: 50px;
+}
+.counter {
+  font-size: 5em; /* 数字のサイズを大きくする */
+  color: #000; /* 数字の色を黒にする（必要に応じて変更） */
+  margin: 0 20px; /* 数字の左右の余白を設定 */
+}
+.title {
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+.subtitle {
+  font-size: 1.5em;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.visitor {
+  display: flex;
+  justify-content: center; /* 中心に配置 */
+  align-items: center; /* 垂直方向も中心に */
+}
+
+.unit {
+  font-size: 1em; /* 単位のサイズを数字より小さくする */
+  color: #000; /* 単位の色を黒にする（必要に応じて変更） */
+  margin-left: -10px; /* 単位の位置を数字に近づける */
+  margin-top: 2rem;
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 20px;
+  }
+  .counter {
+    font-size: 3em;
+  }
+  .title {
+    font-size: 1.5em;
+  }
+  .subtitle {
+    font-size: 1em;
+  }
+}
