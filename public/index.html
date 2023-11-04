@@ -19,7 +19,7 @@
     <script>
       // サーバーからカウンターの値を取得して表示を更新する関数
       function fetchVisitorCount() {
-        fetch("/count")
+        fetch("/counter/count")
           .then((response) => {
             if (!response.ok) {
               throw new Error("Network response was not ok");

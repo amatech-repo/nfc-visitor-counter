@@ -15,7 +15,7 @@
     <script>
       // カウントを開始する
       function startCount() {
-        fetch("/start-count")
+        fetch("/admin/start-count")
           .then((response) => {
             if (!response.ok) {
               throw new Error("Network response was not ok");
@@ -36,7 +36,7 @@
 
       // カウントを停止する
       function stopCount() {
-        fetch("/stop-count")
+        fetch("/admin/stop-count")
           .then((response) => {
             if (!response.ok) {
               throw new Error("Network response was not ok");
@@ -61,7 +61,7 @@
         if (password !== null && password !== "") {
           // APIキーとパスワードを送信する
           fetch(
-            `/reset-count?apiKey=d7521ea6cd551696b4f5e3214c4a6fd38a7f29fefd6c100850bd4ea46525b438&password=${encodeURIComponent(
+            `/admin/reset-count?apiKey=d7521ea6cd551696b4f5e3214c4a6fd38a7f29fefd6c100850bd4ea46525b438&password=${encodeURIComponent(
               password
             )}`,
             { method: "GET" }
