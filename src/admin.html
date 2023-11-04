@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>管理者画面</title>
+  </head>
+  <body>
+    <h1>来場者カウンター管理画面</h1>
+    <div>
+      <button onclick="startCount()">スタート</button>
+      <button onclick="stopCount()">停止</button>
+      <button onclick="resetCount()">カウントリセット</button>
+    </div>
+
+    <script>
+      // カウントを開始する
+      function startCount() {
+        fetch("/start-count")
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.text();
+          })
+          .then((message) => {
+            console.log(message);
+            // ここでカウンター表示をアクティブにするなどの処理が可能
+          })
+          .catch((error) => {
+            console.error(
+              "There has been a problem with your fetch operation:",
+              error
+            );
+          });
+      }
+
+      // カウントを停止する
+      function stopCount() {
+        fetch("/stop-count")
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.text();
+          })
+          .then((message) => {
+            console.log(message);
+            // ここでカウンター表示を非アクティブにするなどの処理が可能
+          })
+          .catch((error) => {
+            console.error(
+              "There has been a problem with your fetch operation:",
+              error
+            );
+          });
+      }
+
+      // カウントをリセットする
+      function resetCount() {
+        const password = prompt("パスワードを入力してください:");
+        if (password !== null && password !== "") {
+          // APIキーとパスワードを送信する
+          fetch(
+            `/reset-count?apiKey=d7521ea6cd551696b4f5e3214c4a6fd38a7f29fefd6c100850bd4ea46525b438&password=${encodeURIComponent(
+              password
+            )}`,
+            { method: "GET" }
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Response not OK");
+              }
+              return response.text();
+            })
+            .then((text) => {
+              console.log(text);
+              alert("リセットに成功しました。");
+            })
+            .catch((error) => {
+              console.error("Error resetting count:", error);
+              alert("リセットに失敗しました。");
+            });
+        }
+      }
+    </script>
+  </body>
+</html>
