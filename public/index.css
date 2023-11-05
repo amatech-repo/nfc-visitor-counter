@@ -5,16 +5,17 @@ body {
   padding: 50px;
 }
 .counter {
-  font-size: 5em; /* 数字のサイズを大きくする */
-  color: #000; /* 数字の色を黒にする（必要に応じて変更） */
-  margin: 0 20px; /* 数字の左右の余白を設定 */
+  font-size: 18vh;
+  color: #000;
+  margin: 0 20px;
+  font-weight: bold;
 }
 .title {
-  font-size: 2em;
+  font-size: 14vh;
   margin-bottom: 10px;
 }
 .subtitle {
-  font-size: 1.5em;
+  font-size: 8vh;
   color: #333;
   margin-bottom: 30px;
 }
@@ -26,10 +27,16 @@ body {
 }
 
 .unit {
-  font-size: 1em; /* 単位のサイズを数字より小さくする */
-  color: #000; /* 単位の色を黒にする（必要に応じて変更） */
-  margin-left: -10px; /* 単位の位置を数字に近づける */
-  margin-top: 2rem;
+  font-size: 8vh;
+  color: #000;
+  margin-left: -10px;
+  margin-top: 5rem;
+}
+
+img {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
 }
 
 @media (max-width: 600px) {
@@ -44,5 +51,16 @@ body {
   }
   .subtitle {
     font-size: 1em;
+  }
+
+  .unit {
+    font-size: 1em;
+    margin-top: 1.2rem;
+  }
+
+  img {
+    width: 40%;
+    max-width: 300px;
+    height: auto;
   }
 }

@@ -9,14 +9,14 @@
   <body>
     <div id="app">
       <div class="title">Welcome to あまてく</div>
-      <div class="subtitle">来場者数</div>
+      <div class="subtitle">今日の来場者数</div>
       <div class="visitor">
         <div id="visitorCount" class="counter">00</div>
         <div class="unit">人</div>
       </div>
 
       <div>
-        <div>読み取ってね</div>
+        <div class="unit">読み取ってね</div>
         <img src="./assets/increment.png" alt="" srcset="" />
       </div>
     </div>
@@ -41,8 +41,8 @@
             );
           });
 
-        // 1分ごとに来場者数を更新する
-        setTimeout(fetchVisitorCount, 60 * 1000);
+        // 20sごとに来場者数を更新する
+        setTimeout(fetchVisitorCount, 20 * 1000);
       }
 
       // 表示を更新する関数
