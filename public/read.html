@@ -7,10 +7,11 @@
   </head>
   <body>
     <div>あなたは</div>
-    <div>〇〇<span>人目</span></div>
+    <div id="aVisitorCount">00</div>
+    <div>人目</div>
     <div>です</div>
     <button type="button" onclick="openUrl()">投票する</button>
-    <button onclick="goToHomePage()">トップページに戻る</button>
+    <button onclick="goToHomePage()">ホームへ</button>
 
     <script>
       function openUrl() {
@@ -23,6 +24,37 @@
         // トップページにリダイレクト
         window.location.href = "/";
       }
+
+      // サーバーからカウンターの値を取得して表示する関数
+      function fetchVisitorCount() {
+        fetch("/counter/count")
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            updateDisplay(data.count);
+          })
+          .catch((error) => {
+            console.error(
+              "There has been a problem with your fetch operation:",
+              error
+            );
+          });
+      }
+
+      // 表示を更新する関数
+      function updateDisplay(count) {
+        const visitorCountElement = document.getElementById("aVisitorCount");
+        visitorCountElement.textContent = count.toString().padStart(2, "0");
+      }
+
+      // ページが読み込まれた時にカウンターを取得する
+      window.addEventListener("DOMContentLoaded", (event) => {
+        fetchVisitorCount();
+      });
     </script>
   </body>
 </html>
