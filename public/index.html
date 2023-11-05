@@ -36,8 +36,8 @@
             );
           });
 
-        // 5秒ごとに来場者数を更新する
-        setInterval(fetchVisitorCount, 5000);
+        // 1分ごとに来場者数を更新する
+        setTimeout(fetchVisitorCount, 60 * 1000);
       }
 
       // 表示を更新する関数
