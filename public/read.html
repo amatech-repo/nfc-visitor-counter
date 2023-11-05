@@ -1,17 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/read.css" />
     <title>来場者カウンター</title>
   </head>
   <body>
-    <div>あなたは</div>
-    <div id="aVisitorCount">00</div>
-    <div>人目</div>
-    <div>です</div>
-    <button type="button" onclick="openUrl()">投票する</button>
-    <button onclick="goToHomePage()">ホームへ</button>
+    <div class="container">
+      <div class="your">あなたは</div>
+      <div class="visitor">
+        <div id="aVisitorCount">00</div>
+        <div class="unit">人目</div>
+      </div>
+      <div class="text">の来場者です</div>
+      <div class="button">
+        <button onclick="goToHomePage()">ホーム</button>
+        <button type="button" onclick="openUrl()">投票する</button>
+      </div>
+    </div>
 
     <script>
       function openUrl() {

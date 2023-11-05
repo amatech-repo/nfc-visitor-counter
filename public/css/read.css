@@ -1,0 +1,93 @@
+body {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  background: #f7f7f7;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+}
+
+.container {
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 0 30px;
+  height: 75%;
+}
+
+.your {
+  font-size: 4vh;
+  margin-bottom: 10px;
+}
+
+#aVisitorCount {
+  font-size: 10vh;
+  margin: 20px 0;
+  font-weight: bold;
+}
+
+.text {
+  font-size: 4vh;
+  margin-bottom: 5rem;
+}
+
+.visitor {
+  display: flex;
+  justify-content: center; /* 中心に配置 */
+  align-items: center; /* 垂直方向も中心に */
+  gap: 15px;
+}
+
+.unit {
+  font-size: 1em; /* 単位のサイズを数字より小さくする */
+  color: #000; /* 単位の色を黒にする（必要に応じて変更） */
+  margin-left: -10px; /* 単位の位置を数字に近づける */
+  margin-top: 2rem;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 20rem;
+  height: 4rem;
+  font-size: 2rem;
+}
+button:hover {
+  background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem; /* スマホ画面でのパディングを減らす */
+    margin: 0; /* 余白をなくす */
+    box-shadow: none; /* スマホでは影を表示しない */
+  }
+
+  #aVisitorCount {
+    font-size: 3em; /* スマホでは文字サイズを少し小さく */
+  }
+
+  button {
+    padding: 10px 5%; /* ボタンのパディングをパーセンテージで指定 */
+    font-size: 1.2em; /* フォントサイズを大きくする */
+    width: 100rem; /* 幅を自動調整に戻す */
+    margin: 10px 5%; /* 両サイドに余白を設定 */
+  }
+
+  /* ボタンを画面の幅に合わせて広げる */
+  .container button {
+    display: block;
+    width: calc(
+      100% - 20px
+    ); /* ボタンの幅をコンテナの100%から両側のマージンを引いた幅にする */
+    margin: 10px; /* これはボタンに適切なマージンを与える */
+  }
+}
