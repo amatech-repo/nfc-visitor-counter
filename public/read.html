@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/read.css" />
+    <title>来場者カウンター</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="your">あなたは</div>
+      <div class="visitor">
+        <div id="aVisitorCount">00</div>
+        <div class="unit">人目</div>
+      </div>
+      <div class="text">の来場者です</div>
+      <div class="button">
+        <button onclick="goToHomePage()">ホーム</button>
+        <button type="button" onclick="openUrl()">投票する</button>
+      </div>
+    </div>
+
+    <script>
+      function openUrl() {
+        window.open(
+          "https://docs.google.com/forms/d/e/1FAIpQLSd3pUibcQqY3dWCuJmS23dCL_G4DZffyMX9MQUPf_8UVKVM0Q/viewform"
+        );
+      }
+
+      function goToHomePage() {
+        // トップページにリダイレクト
+        window.location.href = "/";
+      }
+
+      // サーバーからカウンターの値を取得して表示する関数
+      function fetchVisitorCount() {
+        fetch("/counter/count")
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            updateDisplay(data.count);
+          })
+          .catch((error) => {
+            console.error(
+              "There has been a problem with your fetch operation:",
+              error
+            );
+          });
+      }
+
+      // 表示を更新する関数
+      function updateDisplay(count) {
+        const visitorCountElement = document.getElementById("aVisitorCount");
+        visitorCountElement.textContent = count.toString().padStart(2, "0");
+      }
+
+      // ページが読み込まれた時にカウンターを取得する
+      window.addEventListener("DOMContentLoaded", (event) => {
+        fetchVisitorCount();
+      });
+    </script>
+  </body>
+</html>

@@ -1,6 +1,7 @@
 const express = require("express");
 const db = require("../db/database");
 const state = require("../state");
+const path = require("path");
 const router = express.Router();
 
 // NFCタグからアクセスされるエンドポイント
@@ -8,6 +9,8 @@ router.get("/increment", (req, res) => {
   if (!state.getCountingEnabled()) {
     return res.status(403).send("現在カウントは有効ではありません。");
   }
+
+  res.sendFile(path.join(__dirname, "..", "..", "public", "read.html"));
 
   const selectSql = `SELECT id, totalVisitors FROM visitor_counts WHERE day = strftime('%Y-%m-%d', 'now', 'localtime');`;
 
@@ -25,7 +28,7 @@ router.get("/increment", (req, res) => {
         if (err) {
           return console.error(err.message);
         }
-        res.send(`来場者数は現在: ${row.totalVisitors + 1}です。`);
+        // res.send(`来場者数は現在: ${row.totalVisitors + 1}です。`);
       });
     } else {
       // レコードが存在しない場合、新しいレコードを作成
@@ -34,7 +37,7 @@ router.get("/increment", (req, res) => {
         if (err) {
           return console.error(err.message);
         }
-        res.send("来場者数は1から始まります。");
+        // res.send("来場者数は1から始まります。");
       });
     }
   });
