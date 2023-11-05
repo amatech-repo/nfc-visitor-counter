@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>来場者カウンター</title>
+  </head>
+  <body>
+    <div>あなたは</div>
+    <div>〇〇<span>人目</span></div>
+    <div>です</div>
+    <button type="button" onclick="openUrl()">投票する</button>
+    <button onclick="goToHomePage()">トップページに戻る</button>
+
+    <script>
+      function openUrl() {
+        window.open(
+          "https://docs.google.com/forms/d/e/1FAIpQLSd3pUibcQqY3dWCuJmS23dCL_G4DZffyMX9MQUPf_8UVKVM0Q/viewform"
+        );
+      }
+
+      function goToHomePage() {
+        // トップページにリダイレクト
+        window.location.href = "/";
+      }
+    </script>
+  </body>
+</html>
